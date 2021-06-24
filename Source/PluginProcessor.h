@@ -9,6 +9,7 @@
 #pragma once
 
 #include <JuceHeader.h>
+#include <array>
 #include "../ame/ame.hpp"
 
 //==============================================================================
@@ -56,5 +57,10 @@ public:
 
 private:
     //==============================================================================
+    static constexpr int maximumChannels = 2;
+    static constexpr int maximumBufferSize = 4096;
+    ame::IIR::BiQuad::BiQuad<maximumChannels> lpf;
+    std::array<float, maximumChannels * maximumBufferSize> interleavedBuffer;
+    
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (AmejuceAudioProcessor)
 };
