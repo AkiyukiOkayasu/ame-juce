@@ -58,9 +58,9 @@ public:
 private:
     //==============================================================================
     static constexpr int maximumChannels = 2;
-    static constexpr int maximumBufferSize = 4096;
+    static constexpr int maximumBufferSize = 8192;
     ame::IIR::BiQuad::BiQuad<maximumChannels> lpf;
-    std::array<float, maximumChannels * maximumBufferSize> interleavedBuffer;
+    std::array<float, maximumChannels * maximumBufferSize> interleavedBuffer{};
     
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (AmejuceAudioProcessor)
 };
