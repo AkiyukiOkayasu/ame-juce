@@ -8,13 +8,14 @@
 
 #pragma once
 
-#include <JuceHeader.h>
 #include "PluginProcessor.h"
+
+#include <JuceHeader.h>
 
 //==============================================================================
 /**
 */
-class AmejuceAudioProcessorEditor  : public juce::AudioProcessorEditor
+class AmejuceAudioProcessorEditor : public juce::AudioProcessorEditor
 {
 public:
     AmejuceAudioProcessorEditor (AmejuceAudioProcessor&);

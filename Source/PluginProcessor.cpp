@@ -7,19 +7,20 @@
 */
 
 #include "PluginProcessor.h"
+
 #include "PluginEditor.h"
 
 //==============================================================================
 AmejuceAudioProcessor::AmejuceAudioProcessor()
 #ifndef JucePlugin_PreferredChannelConfigurations
-     : AudioProcessor (BusesProperties()
-                     #if ! JucePlugin_IsMidiEffect
-                      #if ! JucePlugin_IsSynth
-                       .withInput  ("Input",  juce::AudioChannelSet::stereo(), true)
-                      #endif
-                       .withOutput ("Output", juce::AudioChannelSet::stereo(), true)
-                     #endif
-                       )
+    : AudioProcessor (BusesProperties()
+    #if ! JucePlugin_IsMidiEffect
+        #if ! JucePlugin_IsSynth
+                          .withInput ("Input", juce::AudioChannelSet::stereo(), true)
+        #endif
+                          .withOutput ("Output", juce::AudioChannelSet::stereo(), true)
+    #endif
+    )
 #endif
 {
 }
@@ -36,29 +37,29 @@ const juce::String AmejuceAudioProcessor::getName() const
 
 bool AmejuceAudioProcessor::acceptsMidi() const
 {
-   #if JucePlugin_WantsMidiInput
+#if JucePlugin_WantsMidiInput
     return true;
-   #else
+#else
     return false;
-   #endif
+#endif
 }
 
 bool AmejuceAudioProcessor::producesMidi() const
 {
-   #if JucePlugin_ProducesMidiOutput
+#if JucePlugin_ProducesMidiOutput
     return true;
-   #else
+#else
     return false;
-   #endif
+#endif
 }
 
 bool AmejuceAudioProcessor::isMidiEffect() const
 {
-   #if JucePlugin_IsMidiEffect
+#if JucePlugin_IsMidiEffect
     return true;
-   #else
+#else
     return false;
-   #endif
+#endif
 }
 
 double AmejuceAudioProcessor::getTailLengthSeconds() const
@@ -68,8 +69,8 @@ double AmejuceAudioProcessor::getTailLengthSeconds() const
 
 int AmejuceAudioProcessor::getNumPrograms()
 {
-    return 1;   // NB: some hosts don't cope very well if you tell them there are 0 programs,
-                // so this should be at least 1, even if you're not really implementing programs.
+    return 1; // NB: some hosts don't cope very well if you tell them there are 0 programs,
+              // so this should be at least 1, even if you're not really implementing programs.
 }
 
 int AmejuceAudioProcessor::getCurrentProgram()
@@ -93,7 +94,7 @@ void AmejuceAudioProcessor::changeProgramName (int index, const juce::String& ne
 //==============================================================================
 void AmejuceAudioProcessor::prepareToPlay (double sampleRate, int samplesPerBlock)
 {
-    lpf.setCoefficients(ame::IIR::BiQuad::makeLowPass(sampleRate, 440.0f, 0.71f));
+    lpf.setCoefficients (ame::IIR::BiQuad::makeLowPass (sampleRate, 440.0f, 0.71f));
 }
 
 void AmejuceAudioProcessor::releaseResources()
@@ -105,49 +106,49 @@ void AmejuceAudioProcessor::releaseResources()
 #ifndef JucePlugin_PreferredChannelConfigurations
 bool AmejuceAudioProcessor::isBusesLayoutSupported (const BusesLayout& layouts) const
 {
-  #if JucePlugin_IsMidiEffect
+    #if JucePlugin_IsMidiEffect
     juce::ignoreUnused (layouts);
     return true;
-  #else
+    #else
     // This is the place where you check if the layout is supported.
     // In this template code we only support mono or stereo.
     // Some plugin hosts, such as certain GarageBand versions, will only
     // load plugins that support stereo bus layouts.
     if (layouts.getMainOutputChannelSet() != juce::AudioChannelSet::mono()
-     && layouts.getMainOutputChannelSet() != juce::AudioChannelSet::stereo())
+        && layouts.getMainOutputChannelSet() != juce::AudioChannelSet::stereo())
         return false;
 
-    // This checks if the input layout matches the output layout
-   #if ! JucePlugin_IsSynth
+            // This checks if the input layout matches the output layout
+        #if ! JucePlugin_IsSynth
     if (layouts.getMainOutputChannelSet() != layouts.getMainInputChannelSet())
         return false;
-   #endif
+        #endif
 
     return true;
-  #endif
+    #endif
 }
 #endif
 
 void AmejuceAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, juce::MidiBuffer& midiMessages)
 {
     juce::ScopedNoDenormals noDenormals;
-    [[maybe_unused]] auto totalNumInputChannels  = getTotalNumInputChannels();
-	[[maybe_unused]] auto totalNumOutputChannels = getTotalNumOutputChannels();
+    [[maybe_unused]] auto totalNumInputChannels = getTotalNumInputChannels();
+    [[maybe_unused]] auto totalNumOutputChannels = getTotalNumOutputChannels();
     const auto numChannels = buffer.getNumChannels();
     const auto bufferSize = buffer.getNumSamples();
-    
-	jassert(std::max({totalNumInputChannels, totalNumOutputChannels, numChannels}) <= maximumChannels);
-    jassert(bufferSize <= maximumBufferSize);
-	
-	//======== JUCEのチャンネル分割バッファーをameで扱えるようにインターリーブに並び替えてコピー ========
-	juce::AudioDataConverters::interleaveSamples(buffer.getArrayOfReadPointers(), interleavedBuffer.getWritePointer(), bufferSize, numChannels);
-	
-	//======== ameによるエフェクト処理 ========
-    ame::AudioBlockView block(interleavedBuffer.getWritePointer(), numChannels, bufferSize);
-    lpf.process(block);
-	
-	//======== ameのインターリーブバッファーをチャンネル分割に並び替えてJUCEに戻す ========
-	juce::AudioDataConverters::deinterleaveSamples(block.getReadPointer(), buffer.getArrayOfWritePointers(), bufferSize, numChannels);
+
+    jassert (std::max ({ totalNumInputChannels, totalNumOutputChannels, numChannels }) <= maximumChannels);
+    jassert (bufferSize <= maximumBufferSize);
+
+    //======== JUCEのチャンネル分割バッファーをameで扱えるようにインターリーブに並び替えてコピー ========
+    juce::AudioDataConverters::interleaveSamples (buffer.getArrayOfReadPointers(), interleavedBuffer.getWritePointer(), bufferSize, numChannels);
+
+    //======== ameによるエフェクト処理 ========
+    ame::AudioBlockView block (interleavedBuffer.getWritePointer(), numChannels, bufferSize);
+    lpf.process (block);
+
+    //======== ameのインターリーブバッファーをチャンネル分割に並び替えてJUCEに戻す ========
+    juce::AudioDataConverters::deinterleaveSamples (block.getReadPointer(), buffer.getArrayOfWritePointers(), bufferSize, numChannels);
 }
 
 //==============================================================================

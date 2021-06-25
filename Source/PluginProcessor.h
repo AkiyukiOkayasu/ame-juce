@@ -8,14 +8,15 @@
 
 #pragma once
 
+#include "../ame/ame.hpp"
+
 #include <JuceHeader.h>
 #include <array>
-#include "../ame/ame.hpp"
 
 //==============================================================================
 /**
 */
-class AmejuceAudioProcessor  : public juce::AudioProcessor
+class AmejuceAudioProcessor : public juce::AudioProcessor
 {
 public:
     //==============================================================================
@@ -26,9 +27,9 @@ public:
     void prepareToPlay (double sampleRate, int samplesPerBlock) override;
     void releaseResources() override;
 
-   #ifndef JucePlugin_PreferredChannelConfigurations
+#ifndef JucePlugin_PreferredChannelConfigurations
     bool isBusesLayoutSupported (const BusesLayout& layouts) const override;
-   #endif
+#endif
 
     void processBlock (juce::AudioBuffer<float>&, juce::MidiBuffer&) override;
 
@@ -57,11 +58,11 @@ public:
 
 private:
     //==============================================================================
-	static constexpr int interleaveChannels = 2;// ame::AudioBufferのインターリーブチャンネル数
-    static constexpr int maximumChannels = 2;// BiQuadクラスが処理できる最大のチャンネル数
-    static constexpr int maximumBufferSize = 8192;//ame::AudioBufferが確保している最大サンプル数（チャンネルあたり）
-    ame::IIR::BiQuad::BiQuad<maximumChannels> lpf;
-	ame::AudioBuffer<float, interleaveChannels, maximumBufferSize> interleavedBuffer;
-    
+    static constexpr int interleaveChannels = 2;                                      //ame::AudioBufferのインターリーブチャンネル数
+    static constexpr int maximumChannels = 2;                                         //BiQuadクラスが処理できる最大のチャンネル数
+    static constexpr int maximumBufferSize = 8192;                                    //ame::AudioBufferが確保している最大サンプル数（チャンネルあたり）
+    ame::IIR::BiQuad::BiQuad<maximumChannels> lpf;                                    //BiQuadフィルタ
+    ame::AudioBuffer<float, interleaveChannels, maximumBufferSize> interleavedBuffer; //ame用のオーディオバッファー（インターリーブ）
+
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (AmejuceAudioProcessor)
 };

@@ -6,8 +6,9 @@
   ==============================================================================
 */
 
-#include "PluginProcessor.h"
 #include "PluginEditor.h"
+
+#include "PluginProcessor.h"
 
 //==============================================================================
 AmejuceAudioProcessorEditor::AmejuceAudioProcessorEditor (AmejuceAudioProcessor& p)
