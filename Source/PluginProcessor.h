@@ -57,12 +57,11 @@ public:
 
 private:
     //==============================================================================
-    static constexpr int maximumChannels = 2;
-    static constexpr int maximumBufferSize = 8192;
+	static constexpr int interleaveChannels = 2;// ame::AudioBufferのインターリーブチャンネル数
     static constexpr int maximumChannels = 2;// BiQuadクラスが処理できる最大のチャンネル数
     static constexpr int maximumBufferSize = 8192;//ame::AudioBufferが確保している最大サンプル数（チャンネルあたり）
     ame::IIR::BiQuad::BiQuad<maximumChannels> lpf;
-    std::array<float, maximumChannels * maximumBufferSize> interleavedBuffer{};
+	ame::AudioBuffer<float, interleaveChannels, maximumBufferSize> interleavedBuffer;
     
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (AmejuceAudioProcessor)
 };
