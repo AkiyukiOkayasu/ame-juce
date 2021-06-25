@@ -138,12 +138,16 @@ void AmejuceAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, juce
     
 	jassert(std::max({totalNumInputChannels, totalNumOutputChannels, numChannels}) <= maximumChannels);
     jassert(bufferSize <= maximumBufferSize);
-    
-    ame::interleaveSamples(buffer.getArrayOfReadPointers(), interleavedBuffer.data(), bufferSize, numChannels);
-    ame::AudioBlock block(interleavedBuffer.data(), bufferSize, numChannels);
+	
+	//======== JUCEのチャンネル分割バッファーをameで扱えるようにインターリーブに並び替えてコピー ========
+	juce::AudioDataConverters::interleaveSamples(buffer.getArrayOfReadPointers(), interleavedBuffer.getWritePointer(), bufferSize, numChannels);
+	
+	//======== ameによるエフェクト処理 ========
+    ame::AudioBlockView block(interleavedBuffer.getWritePointer(), numChannels, bufferSize);
     lpf.process(block);
-    
-    ame::deinterleaveSamples(block.getReadPointer(), buffer.getArrayOfWritePointers(), bufferSize, numChannels);
+	
+	//======== ameのインターリーブバッファーをチャンネル分割に並び替えてJUCEに戻す ========
+	juce::AudioDataConverters::deinterleaveSamples(block.getReadPointer(), buffer.getArrayOfWritePointers(), bufferSize, numChannels);
 }
 
 //==============================================================================
