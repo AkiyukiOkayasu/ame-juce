@@ -131,12 +131,12 @@ bool AmejuceAudioProcessor::isBusesLayoutSupported (const BusesLayout& layouts) 
 void AmejuceAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, juce::MidiBuffer& midiMessages)
 {
     juce::ScopedNoDenormals noDenormals;
-    auto totalNumInputChannels  = getTotalNumInputChannels();
-    auto totalNumOutputChannels = getTotalNumOutputChannels();
+    [[maybe_unused]] auto totalNumInputChannels  = getTotalNumInputChannels();
+	[[maybe_unused]] auto totalNumOutputChannels = getTotalNumOutputChannels();
     const auto numChannels = buffer.getNumChannels();
     const auto bufferSize = buffer.getNumSamples();
     
-    jassert(std::max(totalNumInputChannels, totalNumOutputChannels) <= maximumChannels);
+	jassert(std::max({totalNumInputChannels, totalNumOutputChannels, numChannels}) <= maximumChannels);
     jassert(bufferSize <= maximumBufferSize);
     
     ame::interleaveSamples(buffer.getArrayOfReadPointers(), interleavedBuffer.data(), bufferSize, numChannels);
