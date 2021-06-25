@@ -58,11 +58,9 @@ public:
 
 private:
     //==============================================================================
-    static constexpr int interleaveChannels = 2;                                      //ame::AudioBufferのインターリーブチャンネル数
-    static constexpr int maximumChannels = 2;                                         //BiQuadクラスが処理できる最大のチャンネル数
-    static constexpr int maximumBufferSize = 8192;                                    //ame::AudioBufferが確保している最大サンプル数（チャンネルあたり）
-    ame::IIR::BiQuad::BiQuad<maximumChannels> lpf;                                    //BiQuadフィルタ
-    ame::AudioBuffer<float, interleaveChannels, maximumBufferSize> interleavedBuffer; //ame用のオーディオバッファー（インターリーブ）
+    static constexpr int maximumChannels = 2;      //BiQuadクラスが処理できる最大のチャンネル数
+    static constexpr int maximumBufferSize = 8192; //ame用オーディオバッファーが確保するサンプル数（チャンネルあたり）
+    ame::IIR::BiQuad::BiQuad<maximumChannels> lpf;
     static constexpr int BufferCapacity = maximumChannels * maximumBufferSize;                        //ame用オーディオバッファーが確保するサンプル数（全チャンネル合計）
     ame::AudioBuffer<float, BufferCapacity> interleavedBuffer { maximumChannels, maximumBufferSize }; //ame用オーディオバッファー（インターリーブ）
 
