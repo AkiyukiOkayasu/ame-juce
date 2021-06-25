@@ -1,0 +1,4 @@
+= ame-juce 
+
+An example of combining https://github.com/AkiyukiOkayasu/ame[ame] and JUCE to make VST and AU plug-ins.
+It was created so that you can easily try ame without having to develop any hardware or firmware.
