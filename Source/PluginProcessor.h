@@ -63,6 +63,8 @@ private:
     static constexpr int maximumBufferSize = 8192;                                    //ame::AudioBufferが確保している最大サンプル数（チャンネルあたり）
     ame::IIR::BiQuad::BiQuad<maximumChannels> lpf;                                    //BiQuadフィルタ
     ame::AudioBuffer<float, interleaveChannels, maximumBufferSize> interleavedBuffer; //ame用のオーディオバッファー（インターリーブ）
+    static constexpr int BufferCapacity = maximumChannels * maximumBufferSize;                        //ame用オーディオバッファーが確保するサンプル数（全チャンネル合計）
+    ame::AudioBuffer<float, BufferCapacity> interleavedBuffer { maximumChannels, maximumBufferSize }; //ame用オーディオバッファー（インターリーブ）
 
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (AmejuceAudioProcessor)
 };
