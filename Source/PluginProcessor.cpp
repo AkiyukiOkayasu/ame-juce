@@ -95,6 +95,7 @@ void AmejuceAudioProcessor::changeProgramName (int index, const juce::String& ne
 void AmejuceAudioProcessor::prepareToPlay (double sampleRate, int samplesPerBlock)
 {
     lpf.setCoefficients (ame::IIR::BiQuad::makeLowPass (sampleRate, 440.0f, 0.71f));
+    delay.setDelay(10);
 }
 
 void AmejuceAudioProcessor::releaseResources()
@@ -145,7 +146,8 @@ void AmejuceAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, juce
 
     //======== ameによるエフェクト処理 ========
     ame::AudioBlockView block (interleavedBuffer.getWritePointer(), numChannels, bufferSize);
-    lpf.process (block);
+    //lpf.process (block);
+    delay.process(block);
 
     //======== ameのインターリーブバッファーをチャンネル分割に並び替えてJUCEに戻す ========
     juce::AudioDataConverters::deinterleaveSamples (block.getReadPointer(), buffer.getArrayOfWritePointers(), bufferSize, numChannels);
