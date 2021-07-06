@@ -94,7 +94,7 @@ void AmejuceAudioProcessor::changeProgramName (int index, const juce::String& ne
 //==============================================================================
 void AmejuceAudioProcessor::prepareToPlay (double sampleRate, int samplesPerBlock)
 {
-    lpf.setCoefficients (ame::IIR::BiQuad::makeLowPass (sampleRate, 440.0f, 0.71f));
+    //lpf.setCoefficients (ame::dsp::iir::biquad::makeLowPass (sampleRate, 440.0f, 0.71f));
     delay.setDelay(192000);
 }
 

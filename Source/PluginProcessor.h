@@ -8,8 +8,6 @@
 
 #pragma once
 
-#include "../ame/ame.hpp"
-
 #include <JuceHeader.h>
 #include <array>
 
@@ -63,7 +61,7 @@ private:
     static constexpr int BufferCapacity = maximumChannels * maximumBufferSize;     //ame用オーディオバッファーが確保するサンプル数（全チャンネル合計）
     ame::AudioBuffer<float, BufferCapacity> interleavedBuffer { maximumChannels }; //ame用オーディオバッファー（インターリーブ）
     
-    ame::IIR::BiQuad::BiQuad<maximumChannels> lpf;
+    ame::dsp::iir::biquad::BiQuad<maximumChannels> lpf;
     ame::dsp::Delay<maximumChannels, 192000> delay;
 
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (AmejuceAudioProcessor)
