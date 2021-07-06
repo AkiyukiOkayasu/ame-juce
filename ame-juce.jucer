@@ -6,35 +6,39 @@
   <MAINGROUP id="qWGqdG" name="ame-juce">
     <GROUP id="{7604F58B-16DD-8451-9F27-4498EBABDA5F}" name="ame">
       <GROUP id="{62A66667-1BFE-BCDB-8689-21E8B5827044}" name="audio">
-        <FILE id="EBK2fV" name="buffer.hpp" compile="0" resource="0" file="ame/audio/buffer.hpp"/>
-        <FILE id="PdEw7X" name="conversion.hpp" compile="0" resource="0" file="ame/audio/conversion.hpp"/>
-        <FILE id="QHHecx" name="filter.hpp" compile="0" resource="0" file="ame/audio/filter.hpp"/>
-        <FILE id="LiIcdt" name="frequency.hpp" compile="0" resource="0" file="ame/audio/frequency.hpp"/>
-        <FILE id="ZGv2EG" name="interpolation.hpp" compile="0" resource="0"
+        <FILE id="Rwso6j" name="audioBlockView.hpp" compile="0" resource="0"
+              file="ame/audio/audioBlockView.hpp"/>
+        <FILE id="jkPhKs" name="buffer.hpp" compile="0" resource="0" file="ame/audio/buffer.hpp"/>
+        <FILE id="rsNlK5" name="conversion.hpp" compile="0" resource="0" file="ame/audio/conversion.hpp"/>
+        <FILE id="LUSIUL" name="delay.hpp" compile="0" resource="0" file="ame/audio/delay.hpp"/>
+        <FILE id="w0dpuo" name="filter.hpp" compile="0" resource="0" file="ame/audio/filter.hpp"/>
+        <FILE id="zi7CJB" name="frequency.hpp" compile="0" resource="0" file="ame/audio/frequency.hpp"/>
+        <FILE id="hIrFPB" name="interpolation.hpp" compile="0" resource="0"
               file="ame/audio/interpolation.hpp"/>
-        <FILE id="Xhzy0z" name="mapping.hpp" compile="0" resource="0" file="ame/audio/mapping.hpp"/>
-        <FILE id="a3BBoI" name="phase.hpp" compile="0" resource="0" file="ame/audio/phase.hpp"/>
-        <FILE id="WEWmHF" name="sine_oscillator.hpp" compile="0" resource="0"
+        <FILE id="P1bi9l" name="mapping.hpp" compile="0" resource="0" file="ame/audio/mapping.hpp"/>
+        <FILE id="ok48ni" name="phase.hpp" compile="0" resource="0" file="ame/audio/phase.hpp"/>
+        <FILE id="oKpHFU" name="sine_oscillator.hpp" compile="0" resource="0"
               file="ame/audio/sine_oscillator.hpp"/>
-        <FILE id="WiUH4a" name="smoothing.hpp" compile="0" resource="0" file="ame/audio/smoothing.hpp"/>
-        <FILE id="Z0JC52" name="time.hpp" compile="0" resource="0" file="ame/audio/time.hpp"/>
-        <FILE id="SpY9jz" name="volume.hpp" compile="0" resource="0" file="ame/audio/volume.hpp"/>
-        <FILE id="dc5BpX" name="wavetable.hpp" compile="0" resource="0" file="ame/audio/wavetable.hpp"/>
+        <FILE id="jPhDMx" name="smoothing.hpp" compile="0" resource="0" file="ame/audio/smoothing.hpp"/>
+        <FILE id="bUDPgD" name="time.hpp" compile="0" resource="0" file="ame/audio/time.hpp"/>
+        <FILE id="gN7qP9" name="volume.hpp" compile="0" resource="0" file="ame/audio/volume.hpp"/>
+        <FILE id="w5COen" name="wavetable.hpp" compile="0" resource="0" file="ame/audio/wavetable.hpp"/>
       </GROUP>
       <GROUP id="{B4AC7181-6131-D677-DEEA-69974198C7AD}" name="math">
-        <FILE id="VuUiNq" name="constants.hpp" compile="0" resource="0" file="ame/math/constants.hpp"/>
-        <FILE id="ExMIbg" name="specialFunctions.hpp" compile="0" resource="0"
+        <FILE id="PxfSsd" name="constants.hpp" compile="0" resource="0" file="ame/math/constants.hpp"/>
+        <FILE id="i1fdUt" name="specialFunctions.hpp" compile="0" resource="0"
               file="ame/math/specialFunctions.hpp"/>
       </GROUP>
       <GROUP id="{D4F03F94-0F67-D257-0320-4FA87F8914F9}" name="system">
-        <FILE id="huXHAz" name="bytes.hpp" compile="0" resource="0" file="ame/system/bytes.hpp"/>
+        <FILE id="WSZwny" name="bytes.hpp" compile="0" resource="0" file="ame/system/bytes.hpp"/>
+        <FILE id="OKYPRt" name="wrap.hpp" compile="0" resource="0" file="ame/system/wrap.hpp"/>
       </GROUP>
-      <FILE id="HFvTrA" name="ame.hpp" compile="0" resource="0" file="ame/ame.hpp"/>
-      <FILE id="qlga2X" name="CMakeLists.txt" compile="0" resource="0" file="ame/CMakeLists.txt"/>
-      <FILE id="cpkaNx" name="Doxyfile" compile="0" resource="0" file="ame/Doxyfile"/>
-      <FILE id="vJsSGW" name="LICENSE" compile="0" resource="0" file="ame/LICENSE"/>
-      <FILE id="zjSm8c" name="README.adoc" compile="0" resource="0" file="ame/README.adoc"/>
-      <FILE id="HdqWP5" name="test.cpp" compile="0" resource="0" file="ame/test.cpp"/>
+      <FILE id="H938qD" name="ame.hpp" compile="0" resource="0" file="ame/ame.hpp"/>
+      <FILE id="lchTx8" name="CMakeLists.txt" compile="0" resource="0" file="ame/CMakeLists.txt"/>
+      <FILE id="Q2OlK8" name="Doxyfile" compile="0" resource="0" file="ame/Doxyfile"/>
+      <FILE id="pX9eUN" name="LICENSE" compile="0" resource="0" file="ame/LICENSE"/>
+      <FILE id="VVncY4" name="README.adoc" compile="0" resource="0" file="ame/README.adoc"/>
+      <FILE id="PjZ658" name="test.cpp" compile="0" resource="0" file="ame/test.cpp"/>
     </GROUP>
     <GROUP id="{160465EE-2E31-6722-D632-4D3A6D8DA5B3}" name="Source">
       <FILE id="eBeWXd" name="PluginProcessor.cpp" compile="1" resource="0"
