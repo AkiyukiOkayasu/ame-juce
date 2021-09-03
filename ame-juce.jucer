@@ -16,10 +16,10 @@
   </MAINGROUP>
   <JUCEOPTIONS JUCE_STRICT_REFCOUNTEDPOINTER="1" JUCE_VST3_CAN_REPLACE_VST2="0"/>
   <EXPORTFORMATS>
-    <XCODE_MAC targetFolder="Builds/MacOSX" microphonePermissionNeeded="1">
+    <XCODE_MAC targetFolder="Builds/MacOSX" microphonePermissionNeeded="1" xcodeValidArchs="x86_64">
       <CONFIGURATIONS>
-        <CONFIGURATION isDebug="1" name="Debug" targetName="ame-juce"/>
-        <CONFIGURATION isDebug="0" name="Release" targetName="ame-juce"/>
+        <CONFIGURATION isDebug="1" name="Debug" targetName="ame-juce" osxArchitecture="Native"/>
+        <CONFIGURATION isDebug="0" name="Release" targetName="ame-juce" osxArchitecture="Native"/>
       </CONFIGURATIONS>
       <MODULEPATHS>
         <MODULEPATH id="juce_audio_basics" path="../../../../Applications/JUCE/modules"/>

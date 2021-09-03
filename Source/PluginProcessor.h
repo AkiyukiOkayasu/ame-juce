@@ -62,7 +62,7 @@ private:
     ame::AudioBuffer<float, BufferCapacity> interleavedBuffer { maximumChannels }; //ame用オーディオバッファー（インターリーブ）
     
     ame::dsp::iir::biquad::BiQuad<maximumChannels> lpf;
-    ame::dsp::Delay<maximumChannels, 192000> delay;
+//    ame::dsp::Delay<maximumChannels, 192000> delay;
 
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (AmejuceAudioProcessor)
 };
