@@ -34,15 +34,15 @@ juce_add_plugin(ame_juce
             # AAX           
     VST3_CATEGORIES "Fx" #複数(3つまで)列挙するとホスト上でフォルダにネストされて表示される
     AU_MAIN_TYPE "kAudioUnitType_Effect"
-    AU_SANDBOX_SAFE TRUE
+    # AU_SANDBOX_SAFE TRUE
     # AAX_CATEGORY ""
     # HARDENED_RUNTIME_ENABLED # macOS app settings
     # HARDENED_RUNTIME_OPTIONS
-    # APP_SANDBOX_ENABLED
+    # APP_SANDBOX_ENABLED TRUE
     # APP_SANDBOX_INHERIT
     # DESCRIPTION "" #設定するとProtoolsのプラグイン名がこのDescriptionになってしまう（バグ？）
-    # MICROPHONE_PERMISSION_ENABLED TRUE
-    # MICROPHONE_PERMISSION_TEXT "This applicaion requires a permission to use an audio input device of your computer. By Default, Built-In microphone will be used."
+    MICROPHONE_PERMISSION_ENABLED TRUE
+    MICROPHONE_PERMISSION_TEXT "This applicaion requires a permission to use an audio input device of your computer. By Default, Built-In microphone will be used."
     PRODUCT_NAME ${PROJECT_NAME}        # The name of the final 
 )
 
