@@ -5,8 +5,6 @@ project(ame_juce VERSION 0.0.1)
 include(FetchContent)
 FetchContent_Declare(ame GIT_REPOSITORY https://github.com/AkiyukiOkayasu/ame GIT_TAG v0.2.2)
 FetchContent_MakeAvailable(ame)
-# FetchContent_Populate(ame GIT_REPOSITORY https://github.com/AkiyukiOkayasu/ame GIT_TAG v0.2.1)
-# include_directories(${ame_SOURCE_DIR}/include)
 
 # JUCE
 add_subdirectory(JUCE)
