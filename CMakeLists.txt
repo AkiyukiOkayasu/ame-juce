@@ -51,7 +51,7 @@ juce_generate_juce_header(ame_juce)
 
 target_compile_options(ame_juce PUBLIC -O2 -Wall -DJUCE_VST3_CAN_REPLACE_VST2=0)
 target_compile_features(ame_juce PUBLIC cxx_std_17)
-target_link_libraries(ame_juce PUBLIC
+target_link_libraries(ame_juce PRIVATE
     juce::juce_audio_basics
     juce::juce_audio_devices
     juce::juce_audio_formats
