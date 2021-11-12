@@ -3,7 +3,7 @@ project(ame_juce VERSION 0.0.1)
 
 # include(CTest)
 include(FetchContent)
-FetchContent_Declare(ame GIT_REPOSITORY https://github.com/AkiyukiOkayasu/ame GIT_TAG v0.2.2)
+FetchContent_Declare(ame GIT_REPOSITORY https://github.com/AkiyukiOkayasu/ame GIT_TAG v0.3.0)
 FetchContent_MakeAvailable(ame)
 
 # JUCE
