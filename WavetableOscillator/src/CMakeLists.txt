@@ -1,4 +1,4 @@
-target_sources(ame_juce PRIVATE
+target_sources(${pluginname} PRIVATE
     PluginEditor.cpp
     PluginProcessor.cpp
 )
