@@ -14,14 +14,14 @@ juce_add_plugin(${pluginname}
     IS_MIDI_EFFECT FALSE                 # Is this plugin a MIDI effect?
     # EDITOR_WANTS_KEYBOARD_FOCUS TRUE/FALSE    # Does the editor need keyboard focus?
     COPY_PLUGIN_AFTER_BUILD TRUE        # ビルドするたびにプラグインをインストールするか？
-    PLUGIN_MANUFACTURER_CODE AkiyukiOkayasu               # 最低一文字大文字でプラグインベンダーのIDを指定
-    PLUGIN_CODE ${pluginname}                            # 最低一文字大文字でプラグインのユニークIDを指定
+    PLUGIN_MANUFACTURER_CODE ${AKIYUKI_PLUGIN_MANIFACTURE_CODE} # 大文字4字でプラグインベンダーのIDを指定
+    PLUGIN_CODE WVTS    # 大文字4字でプラグインのユニークIDを指定
     FORMATS 
     # ここでビルドしたいプラグインの種類を指定する
             Standalone 
             AU
             # AUv3 
-            VST3 
+            # VST3 
             # Unity 
             # AAX           
     VST3_CATEGORIES "Instrument" #複数(3つまで)列挙するとホスト上でフォルダにネストされて表示される
@@ -44,7 +44,7 @@ juce_generate_juce_header(${pluginname})
 
 target_compile_options(${pluginname} PUBLIC -O2 -Wall)
 target_compile_definitions(${pluginname} PUBLIC JUCE_VST3_CAN_REPLACE_VST2=0)
-target_compile_features(${pluginname} PUBLIC cxx_std_17)
+target_compile_features(${pluginname} PUBLIC cxx_std_20)
 target_link_libraries(${pluginname} PRIVATE
     juce::juce_audio_basics
     juce::juce_audio_devices
