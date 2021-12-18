@@ -31,7 +31,7 @@ void AmejuceAudioProcessorEditor::paint (juce::Graphics& g)
 
     g.setColour (juce::Colours::white);
     g.setFont (15.0f);
-    g.drawFittedText ("ame-juce", getLocalBounds(), juce::Justification::centred, 1);
+    g.drawFittedText ("Sine 440Hz", getLocalBounds(), juce::Justification::centred, 1);
 }
 
 void AmejuceAudioProcessorEditor::resized()
