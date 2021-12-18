@@ -9,9 +9,12 @@
 #pragma once
 
 #include "ame.hpp"
+#include "ame_Oscillator.hpp"
 
 #include <JuceHeader.h>
 #include <array>
+
+inline constexpr std::array<float, 1024> sineWavetable {};
 
 //==============================================================================
 /**
@@ -60,12 +63,11 @@ private:
     //==============================================================================
     static constexpr int maximumChannels = 2;                                      //BiQuadクラスが処理できる最大のチャンネル数
     static constexpr int maximumBufferSize = 8192;                                 //ame用オーディオバッファーが確保するサンプル数（チャンネルあたり）
-    static constexpr int BufferCapacity = maximumChannels * maximumBufferSize;     //ame用オーディオバッファーが確保するサンプル数（全チャンネル合計）
+    static constexpr int BufferCapacity = maximumChannels * maximumBufferSize;     //ame用オーディオバッファーが確保するサンプル数（全チャンネル合計）
     ame::AudioBuffer<float, BufferCapacity> interleavedBuffer { maximumChannels }; //ame用オーディオバッファー（インターリーブ）
 
-    ame::dsp::iir::biquad::BiQuad<maximumChannels> lpf;
-    //    ame::dsp::Delay<maximumChannels, 192000> delay;
-    ame::WavetableOscillator<float, 1024> wavetableOsc { 48000, 440 };
+    static constexpr auto table = ame::makeSineTable<float, 512>();
+    static inline ame::WavetableOscillator wavetableOsc { std::span { table }, 44100.0f };
 
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (AmejuceAudioProcessor)
 };

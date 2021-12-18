@@ -94,13 +94,8 @@ void AmejuceAudioProcessor::changeProgramName (int index, const juce::String& ne
 //==============================================================================
 void AmejuceAudioProcessor::prepareToPlay (double sampleRate, int samplesPerBlock)
 {
-    //lpf.setCoefficients (ame::dsp::iir::biquad::makeLowPass (sampleRate, 440.0f, 0.71f));
-    //delay.setDelay(192000);
-    auto f = [] (auto& x)
-    {
-        x = ame::sinf (x * ame::twoPi);
-    };
-    wavetableOsc.setWavetable (f);
+    wavetableOsc.setSampleRate (sampleRate);
+    wavetableOsc.setFrequency (440.0f);
 }
 
 void AmejuceAudioProcessor::releaseResources()
