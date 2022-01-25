@@ -9,6 +9,7 @@
 #include "PluginProcessor.h"
 
 #include "PluginEditor.h"
+#include "ame_AudioBuffer.hpp"
 
 //==============================================================================
 AmejuceAudioProcessor::AmejuceAudioProcessor()
@@ -94,6 +95,11 @@ void AmejuceAudioProcessor::changeProgramName (int index, const juce::String& ne
 //==============================================================================
 void AmejuceAudioProcessor::prepareToPlay (double sampleRate, int samplesPerBlock)
 {
+    reverb.setSampleRate (sampleRate);
+    reverb.setMix (2.0, 2.0);
+    jucereberb.setSampleRate (sampleRate);
+    lpf.setSampleRate (sampleRate);
+    lpf.makeLowPass (440.0f, 0.7f);
 }
 
 void AmejuceAudioProcessor::releaseResources()
@@ -139,6 +145,7 @@ void AmejuceAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, juce
     jassert (std::max ({ totalNumInputChannels, totalNumOutputChannels, numChannels }) <= maximumChannels);
     jassert (bufferSize <= maximumBufferSize);
 
+#if 0
     for (auto ch = 0; ch < numChannels; ch++)
     {
         auto b = buffer.getWritePointer (ch);
@@ -147,18 +154,23 @@ void AmejuceAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, juce
             b[samp] = ame::noise();
         }
     }
+#endif
+    // jucereberb.processStereo (buffer.getWritePointer (0), buffer.getWritePointer (1), bufferSize);
 
-#if 0
+#if 1
     //======== JUCEのチャンネル分割バッファーをameで扱えるようにインターリーブに並び替えてコピー ========
-    juce::AudioDataConverters::interleaveSamples (buffer.getArrayOfReadPointers(), interleavedBuffer.getWritePointer(), bufferSize, numChannels);
+    juce::AudioDataConverters::interleaveSamples (buffer.getArrayOfReadPointers(), interleavedBuffer.buffer.data(), bufferSize, numChannels);
 
     //======== ameによるエフェクト処理 ========
-    ame::AudioBlockView block (interleavedBuffer.getWritePointer(), numChannels, bufferSize);
-    //lpf.process (block);
+
+    auto block = interleavedBuffer.makeAudioBlockView();
+    ame::AudioBlockView subView { block.view.subspan (0, numChannels * bufferSize), static_cast<uint_fast32_t> (numChannels) };
+    reverb.process (subView);
+    // lpf.process (block);
     //delay.process(block);
 
     //======== ameのインターリーブバッファーをチャンネル分割に並び替えてJUCEに戻す ========
-    juce::AudioDataConverters::deinterleaveSamples (block.getReadPointer(), buffer.getArrayOfWritePointers(), bufferSize, numChannels);
+    juce::AudioDataConverters::deinterleaveSamples (interleavedBuffer.buffer.data(), buffer.getArrayOfWritePointers(), bufferSize, numChannels);
 #endif
 }
 

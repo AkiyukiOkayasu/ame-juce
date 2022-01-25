@@ -9,6 +9,8 @@
 #pragma once
 
 #include "ame.hpp"
+#include "ame_Biquad.hpp"
+#include "ame_Reverb.hpp"
 
 #include <JuceHeader.h>
 #include <array>
@@ -62,6 +64,9 @@ private:
     static constexpr int maximumBufferSize = 8192;                                 //ame用オーディオバッファーが確保するサンプル数（チャンネルあたり）
     static constexpr int BufferCapacity = maximumChannels * maximumBufferSize;     //ame用オーディオバッファーが確保するサンプル数（全チャンネル合計）
     ame::AudioBuffer<float, BufferCapacity> interleavedBuffer { maximumChannels }; //ame用オーディオバッファー（インターリーブ）
+    ame::dsp::Freeverb<float, 2, 96000> reverb { 48000 };
+    ame::dsp::Biquad<float, 2> lpf { 48000 };
+    juce::Reverb jucereberb {};
 
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (AmejuceAudioProcessor)
 };

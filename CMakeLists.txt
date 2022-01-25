@@ -8,7 +8,7 @@ set(AKIYUKI_PLUGIN_MANIFACTURE_CODE AKYK)
 
 # include(CTest)
 include(FetchContent)
-FetchContent_Declare(ame GIT_REPOSITORY https://github.com/AkiyukiOkayasu/ame GIT_TAG v1.0.2)
+FetchContent_Declare(ame GIT_REPOSITORY https://github.com/AkiyukiOkayasu/ame GIT_TAG v1.0.3-rc3)
 FetchContent_MakeAvailable(ame)
 
 # JUCE
