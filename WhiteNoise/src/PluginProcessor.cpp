@@ -96,7 +96,7 @@ void AmejuceAudioProcessor::changeProgramName (int index, const juce::String& ne
 void AmejuceAudioProcessor::prepareToPlay (double sampleRate, int samplesPerBlock)
 {
     reverb.setSampleRate (sampleRate);
-    reverb.setMix (2.0, 2.0);
+    reverb.setDryWet (0.5f);
     jucereberb.setSampleRate (sampleRate);
     lpf.setSampleRate (sampleRate);
     lpf.makeLowPass (440.0f, 0.7f);
